@@ -51,11 +51,11 @@ int mood=1;
 void loop() {
   int n;
   static int xd=0;
-  static int espera=0;
+  static int waiting=0;
   static int step=0;
   int x1,x2;
-  if (espera>0) {
-    espera--;
+  if (waiting>0) {
+    waiting--;
     delay(1);
   } else {
     x1=   xd+ (xp>16? (16+2*(xp-16)):xp);
@@ -74,7 +74,7 @@ void loop() {
                display.drawBitmap(x2, 8, peyes[mood][2][1], 32, 32, WHITE);
        }
        display.display();
-       espera=random(250, 1000);
+       waiting=random(250, 1000);
        n=random(0,7);
        if (n==6) {
           step=1;
@@ -87,7 +87,7 @@ void loop() {
        display.drawBitmap(x1, 8, eye0, 32, 32, WHITE);
        display.drawBitmap(x2, 8, eye0, 32, 32, WHITE);
        display.display();
-       espera=100;
+       waiting=100;
        step=0;
        break;
       case 2:
@@ -96,7 +96,7 @@ void loop() {
        if (n>5) xd++;
        if (xd<-4) xd=-3;
        if (xd>4) xd=3; 
-       espera=0;
+       waiting=0;
        step=0;
        break;
     }
@@ -109,6 +109,6 @@ if (n==1) {
   mood=(mood>=5?0:mood+1);
   do {} while (readkey()!=0);
   }
-if (n!=0) { espera=0; step=0; }
+if (n!=0) { waiting=0; step=0; }
 
 }
